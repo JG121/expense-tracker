@@ -109,6 +109,8 @@ body {
   </style>
 </head>
 <body>
+  <button onclick="exportExpenses()">Export Expenses</button>
+
   <button id="login-button">Login</button>
   <div class="container">
     <h1>Expense And Income Tracker</h1>
@@ -210,6 +212,28 @@ body {
   </div>
 
   <script>
+
+    // Function to export expenses as a JSON file
+function exportExpenses() {
+  // Convert expenses array to JSON string
+  const expensesJSON = JSON.stringify(expenses);
+
+  // Create a Blob object with the JSON string
+  const blob = new Blob([expensesJSON], { type: 'application/json' });
+
+  // Generate a temporary URL for the Blob object
+  const url = URL.createObjectURL(blob);
+
+  // Create a link element for downloading the file
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'expenses.json';
+  link.click();
+
+  // Clean up the temporary URL
+  URL.revokeObjectURL(url);
+}
+
     // Get login button element
 const loginButton = document.getElementById('login-button');
 
