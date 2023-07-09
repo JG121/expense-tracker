@@ -4,6 +4,21 @@
   <title>Expense And Income Tracker</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+     /* Styles for different devices */
+     @media only screen and (max-width: 600px) {
+      /* Add your styles for smaller devices here */
+    }
+
+    @media only screen and (min-width: 601px) and (max-width: 1024px) {
+      /* Add your styles for medium-sized devices here */
+    }
+
+    @media only screen and (min-width: 1025px) {
+      /* Add your styles for larger devices here */
+    }
+
+    /* Remaining styles from the original code */
+    /* ... */
    /* Style the container */
 .container {
   max-width: 500px;
@@ -94,6 +109,7 @@ body {
   </style>
 </head>
 <body>
+  <button id="login-button">Login</button>
   <div class="container">
     <h1>Expense And Income Tracker</h1>
 
@@ -194,6 +210,18 @@ body {
   </div>
 
   <script>
+    // Get login button element
+const loginButton = document.getElementById('login-button');
+
+// Add event listener to login button
+loginButton.addEventListener('click', function(event) {
+  // Redirect to login.html
+  window.location.href = 'login.html';
+
+  // Prevent the default behavior of the link
+  event.preventDefault();
+});
+
     function saveExpensesToLocalStorage() {
       const expenseItems = document.querySelectorAll(".expense-list li");
 
