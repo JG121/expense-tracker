@@ -1,3 +1,30 @@
+
+
+
+
+
+// Function to export expenses as a JSON file
+function exportExpenses() {
+  // Convert expenses array to JSON string
+  const expensesJSON = JSON.stringify(expenses);
+
+  // Create a Blob object with the JSON string
+  const blob = new Blob([expensesJSON], { type: 'application/json' });
+
+  // Generate a temporary URL for the Blob object
+  const url = URL.createObjectURL(blob);
+
+  // Create a link element for downloading the file
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'expenses.json';
+  link.click();
+
+  // Clean up the temporary URL
+  URL.revokeObjectURL(url);
+}
+
+
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
   $("#name").text(profile.getName());
