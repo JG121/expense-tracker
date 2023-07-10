@@ -1,3 +1,37 @@
+@media only screen and (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .auth-form input,
+  .auth-form button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .expense-form input[type="text"],
+  .expense-form input[type="date"],
+  .expense-form button {
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .expense-list {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+
+
+
+
+
+
+
+
 .expense-list {
   max-height: 500px; /* Adjust the value as needed */
   overflow-y: auto;
