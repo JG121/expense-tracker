@@ -32,10 +32,78 @@
 
 
 
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #000;
+}
+
+.expense-form input[type="text"],
+.expense-form input[type="date"],
+.expense-form button {
+  width: 100%;
+}
+
+.expense-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+  .container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .expense-list {
+    max-height: none;
+    overflow-y: initial;
+  }
+}
+
+
+
+
+
+
+
+
+
+
 .expense-list {
   max-height: 500px; /* Adjust the value as needed */
   overflow-y: auto;
 }
+
+
+
+
+
+
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #000;
+}
+
+.expense-form input[type="text"],
+.expense-form input[type="date"],
+.expense-form button {
+  width: 100%;
+}
+
+.expense-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+
+
 
 
 
