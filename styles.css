@@ -1,3 +1,74 @@
+.expense-list {
+  max-height: 500px; /* Adjust the value as needed */
+  overflow-y: auto;
+}
+
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #000;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.expense-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.expense-form input,
+.expense-form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.expense-form .btn {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.expense-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+.expense-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.expense-list li button {
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.expense-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+}
+
+
+
+
 /* Add your custom styles here */
 body {
   font-family: Arial, sans-serif;
