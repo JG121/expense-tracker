@@ -232,6 +232,19 @@
 
 
 
+
+const shareButton = document.querySelector(".share-button");
+
+shareButton.addEventListener("click", function() {
+  const uniqueId = getUniqueId();
+  const url = `https://jg121.github.io/expense-tracker/?uniqueId=${uniqueId}&edit=true`;
+
+  window.open(url, "_blank");
+});
+
+
+
+
 function getUniqueId() {
   const uniqueId = localStorage.getItem("uniqueId");
 
