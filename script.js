@@ -1,3 +1,16 @@
+function getUniqueId() {
+  const uniqueId = localStorage.getItem("uniqueId");
+
+  if (uniqueId === null) {
+    uniqueId = Math.random().toString(36).substring(7);
+    localStorage.setItem("uniqueId", uniqueId);
+  }
+
+  return uniqueId;
+}
+
+
+
 const uniqueId = Math.random().toString(36).substring(7);
 
 document.getElementById("expenses").setAttribute("data-unique-id", uniqueId);
