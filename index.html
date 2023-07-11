@@ -127,6 +127,26 @@ body {
 }  </style>
 </head>
 <body>
+
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js"></script>
+
+
+<!-- Our script must be loaded after firebase references -->
+ <script src="script.js"></script>
+
+
+
+
+
+
   <button onclick="exportExpenses()">Export Expenses</button>
 
   <button id="login-button">Login</button>
@@ -157,6 +177,7 @@ body {
         <option value="AutoMobile Expenses">AutoMobile Expenses</option>
         <option value="Marketing commission">Commission</option>
         <option value="Gas">Gas</option>
+        <option value="Income">Income</option>
         <option value="Other" id="other-expense-option">Other Expenses</option>
       </select>
 
@@ -229,7 +250,20 @@ body {
     <div class="message">In the total expense area, when it is income, it will be above 0, and if it is an expense, it will be negative.</div>
   </div>
 
+  <p>Unique Link: <span id="unique-link"></span></p>
+</div>
+
+<script src="script.js"></script>
+
   <script>
+
+
+
+
+
+
+
+
 
     // Function to export expenses as a JSON file
 function exportExpenses() {
