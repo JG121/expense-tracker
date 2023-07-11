@@ -1,29 +1,88 @@
+ // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAsYp_nL3wQ2IjNbXvrg-vO1HtOp4keoys",
+    authDomain: "official-expense-tracker.firebaseapp.com",
+    projectId: "official-expense-tracker",
+    storageBucket: "official-expense-tracker.appspot.com",
+    messagingSenderId: "763300574640",
+    appId: "1:763300574640:web:726ad52675760e7aab9275",
+    measurementId: "G-BNZQGHXBKL"
+  };
 
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  // Initialize variables
+  const auth = firebase.auth()
+  const database = firebase.database()
+
+  // Set up our register function
+function register () {
+ // Get all our input fields
+ email = document.getElementById('email').value 
+}
+
+
+
+function generateUniqueLink() {
+  // Generate a random string.
+  const randomString = Math.random().toString(36).substring(7);
+
+  // Return the link.
+  return `https://your-website.com/?link=${randomString}`;
+}
+
+// Generate a unique link for the current device.
+const uniqueLink = generateUniqueLink();
+
+// Store the unique link in the session.
+sessionStorage.setItem("uniqueLink", uniqueLink);
+
+// Display the unique link to the user.
+document.getElementById("unique-link").innerHTML = uniqueLink;
 
 
 
 
 // Function to export expenses as a JSON file
 function exportExpenses() {
-  // Convert expenses array to JSON string
-  const expensesJSON = JSON.stringify(expenses);
+  // Get selected expenses for export
+  const checkboxes = document.querySelectorAll('.expense-list-item input[type="checkbox"]');
+  const selectedExpenses = [];
+  
+  checkboxes.forEach(checkbox => {
+    if (checkbox.checked) {
+      const expenseId = checkbox.getAttribute('data-expense-id');
+      const selectedExpense = expenses.find(expense => expense.id === expenseId);
+      if (selectedExpense) {
+        selectedExpenses.push(selectedExpense);
+      }
+    }
+  });
 
-  // Create a Blob object with the JSON string
-  const blob = new Blob([expensesJSON], { type: 'application/json' });
+  if (selectedExpenses.length > 0) {
+    // Convert selected expenses array to JSON string
+    const expensesJSON = JSON.stringify(selectedExpenses);
 
-  // Generate a temporary URL for the Blob object
-  const url = URL.createObjectURL(blob);
+    // Create a Blob object with the JSON string
+    const blob = new Blob([expensesJSON], { type: 'application/json' });
 
-  // Create a link element for downloading the file
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'expenses.json';
-  link.click();
+    // Generate a temporary URL for the Blob object
+    const url = URL.createObjectURL(blob);
 
-  // Clean up the temporary URL
-  URL.revokeObjectURL(url);
+    // Create a link element for downloading the file
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'expenses.json';
+    link.click();
+
+    // Clean up the temporary URL
+    URL.revokeObjectURL(url);
+  } else {
+    alert('Please select at least one expense to export.');
+  }
 }
-
 
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
@@ -32,7 +91,11 @@ function onSignIn(googleUser) {
   $("#image").attr('src', profile.getImageUrl());
   $(".data").css("display", "block");
   $(".g-signin2").css("display", "none");
+
+  // Redirect to homepage after successful sign-in
+  window.location.href = "index.html";
 }
+
 
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
