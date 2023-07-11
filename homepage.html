@@ -77,7 +77,7 @@
     /* Set the background gradient */
     body {
       background: linear-gradient(to bottom, orange, red);
-      background-repeat: repeat;
+      background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
       margin: 0;
@@ -216,7 +216,16 @@
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/qrcode.min.js"></script>
   <container>
-    <div id="qrcode"></div>
+    <div id="qrcode" style="display: block;"></div>
+    <div id="expenses">
+      <h1>Expenses</h1>
+      <ul>
+        <li>Expense 1</li>
+        <li>Expense 2</li>
+        <li>Expense 3</li>
+      </ul>
+    </div>
+    
   </container>
 
 
