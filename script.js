@@ -9,7 +9,7 @@ function generateUniqueLink() {
     const randomNumber = Math.floor(Math.random() * 1000000);
 
     // Create the unique link using the random number
-    uniqueLink = "https://jg121.github.io/expense-tracker/" + randomNumber;
+    uniqueLink = "https:/jg121.github.io/expense-tracker/" + randomNumber;
 
     // Store the unique link in local storage
     localStorage.setItem("uniqueLink", uniqueLink);
@@ -21,14 +21,12 @@ function generateUniqueLink() {
 // Generate the unique link
 const uniqueLink = generateUniqueLink();
 
-// Update the address bar with the unique link
-window.history.replaceState({}, "", uniqueLink);
-
 // Output the unique link
 console.log("Unique link:", uniqueLink);
 
 // Update the unique link element with the generated unique link
 document.getElementById("unique-link").textContent = uniqueLink;
+
 
 
 
