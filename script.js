@@ -26,6 +26,7 @@ if (currentDeviceId !== uniqueLinkDeviceId) {
   generateQRCode(newUniqueLink);
 }
 
+const QRCode = require("qrcode/dist/qrcode.min.js");
 
 
 
