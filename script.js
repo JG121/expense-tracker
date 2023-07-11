@@ -1,93 +1,88 @@
-const shareButton = document.querySelector(".share-button");
-
-shareButton.addEventListener("click", function() {
-  const uniqueId = getUniqueId();
-  const url = `https://jg121.github.io/expense-tracker/?uniqueId=${uniqueId}&edit=true`;
-
-  window.open(url, "_blank");
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function getUniqueId() {
-  const uniqueId = localStorage.getItem("uniqueId");
-
-  if (uniqueId === null) {
-    uniqueId = Math.random().toString(36).substring(7);
-    localStorage.setItem("uniqueId", uniqueId);
-  }
-
+// Generate a unique ID for the device
+function generateUniqueId() {
+  const uniqueId = Math.random().toString(36).substring(7);
   return uniqueId;
 }
 
-
-
-const uniqueId = Math.random().toString(36).substring(7);
-
-document.getElementById("expenses").setAttribute("data-unique-id", uniqueId);
-
-
-function generateLink() {
-  const uniqueId = Math.random().toString(36).substring(7);
-
-  return `https://jg121.github.io/expense-tracker/?uniqueId=${uniqueId}`;
+// Check if the unique ID is stored in local storage
+function isUniqueIdStored() {
+  return localStorage.getItem("uniqueId") !== null;
 }
 
+// Get the stored unique ID from local storage
+function getStoredUniqueId() {
+  return localStorage.getItem("uniqueId");
+}
 
+// Store the unique ID in local storage
+function storeUniqueId(uniqueId) {
+  localStorage.setItem("uniqueId", uniqueId);
+}
 
+// Check if the URL contains the unique ID
+function isUniqueIdInURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.has("uniqueId");
+}
 
+// Get the unique ID from the URL
+function getUniqueIdFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get("uniqueId");
+}
 
-function generateQRCode(uniqueLink) {
-  // Generate the QR code.
-  const qrcode = new QRCode("unique-link", {
-    width: 200,
-    height: 200,
+// Generate the shareable link with the unique ID
+function generateShareableLink(uniqueId) {
+  const url = window.location.origin + window.location.pathname;
+  const shareableLink = `${url}?uniqueId=${uniqueId}`;
+  return shareableLink;
+}
+
+// Handle page load
+function handlePageLoad() {
+  // Check if the unique ID is stored in local storage
+  if (isUniqueIdStored()) {
+    // Get the stored unique ID
+    const storedUniqueId = getStoredUniqueId();
+
+    // Check if the URL contains the unique ID
+    if (isUniqueIdInURL()) {
+      const urlUniqueId = getUniqueIdFromURL();
+
+      // Check if the URL unique ID matches the stored unique ID
+      if (urlUniqueId === storedUniqueId) {
+        // Same device, the link stays the same
+        console.log("Same device, link stays the same");
+      } else {
+        // Different device, generate new unique ID and store it
+        const newUniqueId = generateUniqueId();
+        storeUniqueId(newUniqueId);
+        console.log("Different device, generated new unique ID");
+      }
+    } else {
+      // URL does not contain the unique ID, append it to the URL
+      const shareableLink = generateShareableLink(storedUniqueId);
+      window.history.replaceState({}, document.title, shareableLink);
+      console.log("Appended unique ID to the URL");
+    }
+  } else {
+    // Unique ID not stored, generate new unique ID and store it
+    const newUniqueId = generateUniqueId();
+    storeUniqueId(newUniqueId);
+    console.log("Generated new unique ID");
+  }
+
+  // Handle sharing button click
+  const shareButton = document.querySelector(".share-button");
+  shareButton.addEventListener("click", function() {
+    const storedUniqueId = getStoredUniqueId();
+    const shareableLink = generateShareableLink(storedUniqueId);
+    console.log("Shareable link:", shareableLink);
   });
-
-  // Display the QR code.
-  document.getElementById("qrcode").appendChild(qrcode.canvas);
 }
 
-// Generate the QR code for the current device.
-const uniqueLink = generateUniqueLink();
-generateQRCode(uniqueLink);
-
-// Check if the user is on a different device.
-const currentDeviceId = localStorage.getItem("deviceId");
-const uniqueLinkDeviceId = sessionStorage.getItem("deviceId");
-
-if (currentDeviceId !== uniqueLinkDeviceId) {
-  // The user is on a different device.
-  // Generate a new unique link.
-  const newUniqueLink = generateUniqueLink();
-
-  // Generate the QR code for the new device.
-  generateQRCode(newUniqueLink);
-}
-const QRCode = require("qrcode");
-generateQRCode(uniqueLink);
-
-
-
-
-
-
-
-
-
+// Call the handlePageLoad function when the page is loaded
+window.addEventListener("load", handlePageLoad);
 
 
 
