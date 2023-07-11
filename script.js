@@ -1,53 +1,82 @@
-// Function to generate a unique link based on the device
-function generateUniqueLink() {
-  // Check if a unique link is already stored in local storage
-  let uniqueLink = localStorage.getItem("uniqueLink");
-
-  // If no unique link is found, generate a new one
-  if (!uniqueLink) {
-    // Generate a random number
-    const randomNumber = Math.floor(Math.random() * 1000000);
-
-    // Create the unique link using the random number
-    uniqueLink = "https:/jg121.github.io/expense-tracker/" + randomNumber;
-
-    // Store the unique link in local storage
-    localStorage.setItem("uniqueLink", uniqueLink);
-  }
-
-  return uniqueLink;
-}
-
-// Generate the unique link
-const uniqueLink = generateUniqueLink();
-
-// Output the unique link
-console.log("Unique link:", uniqueLink);
-
-// Update the unique link element with the generated unique link
-document.getElementById("unique-link").textContent = uniqueLink;
-
-
-
-
-// Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyAsYp_nL3wQ2IjNbXvrg-vO1HtOp4keoys",
-    authDomain: "official-expense-tracker.firebaseapp.com",
-    projectId: "official-expense-tracker",
-    storageBucket: "official-expense-tracker.appspot.com",
-    messagingSenderId: "763300574640",
-    appId: "1:763300574640:web:726ad52675760e7aab9275",
-    measurementId: "G-BNZQGHXBKL"
+// Function to update the URL with expense parameters
+function updateURLParams() {
+  const expenseData = {
+    param1: document.getElementById("expense-category").value,
+    param2: document.getElementById("expense-date").value,
+    // Add more parameters as needed, based on your app's expense form elements
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  // Initialize variables
-  const auth = firebase.auth()
-  const database = firebase.database()
+  const params = new URLSearchParams();
+  Object.entries(expenseData).forEach(([key, value]) => {
+    params.set(key, value);
+  });
+
+  const newUrl = window.location.origin + "?" + params.toString();
+
+  // Update the URL without refreshing the page
+  window.history.pushState({ path: newUrl }, "", newUrl);
+}
+
+// Function to retrieve expense data from URL parameters
+function retrieveExpenseDataFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const expenseData = {};
+
+  urlParams.forEach((value, key) => {
+    expenseData[key] = value;
+  });
+
+  // Use the retrieved expenseData to populate the app with values
+  // ...
+
+  return expenseData;
+}
+
+// Example usage
+updateURLParams();
+
+// Retrieve the expense data from URL parameters
+const retrievedExpenseData = retrieveExpenseDataFromURL();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAsYp_nL3wQ2IjNbXvrg-vO1HtOp4keoys",
+  authDomain: "official-expense-tracker.firebaseapp.com",
+  projectId: "official-expense-tracker",
+  storageBucket: "official-expense-tracker.appspot.com",
+  messagingSenderId: "763300574640",
+  appId: "1:763300574640:web:726ad52675760e7aab9275",
+  measurementId: "G-BNZQGHXBKL"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
   // Set up our register function
 function register () {
