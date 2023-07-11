@@ -4,28 +4,10 @@
   <title>Expense And Income Tracker</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-
-
-
-
-
-body {
-            background: linear-gradient(to bottom, orange, red );
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            margin: 0;
-            padding: 0;
-        
-
-
-
-
-
-
-     /* Styles for different devices */
-     @media only screen and (max-width: 600px) {
-      /* Add your styles for smaller devices here */
+    /* Styles for different devices */
+    @media only screen and (max-width: 600px) {
+      
+    
     }
 
     @media only screen and (min-width: 601px) and (max-width: 1024px) {
@@ -38,115 +20,96 @@ body {
 
     /* Remaining styles from the original code */
     /* ... */
-   /* Style the container */
-.container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f2f2f2;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-}
 
-/* Style the expense form */
-.expense-form {
-  margin-bottom: 20px;
-}
+    /* Style the container */
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f2f2f2;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
 
-.expense-form select,
-.expense-form input[type="text"],
-.expense-form input[type="date"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+    /* Style the expense form */
+    .expense-form {
+      margin-bottom: 20px;
+    }
 
-.expense-form button {
-  padding: 10px 20px;
-  background-color: #337ab7;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
+    .expense-form select,
+    .expense-form input[type="text"],
+    .expense-form input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-/* Style the expense list */
-.expense-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    .expense-form button {
+      padding: 10px 20px;
+      background-color: #337ab7;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
 
-.expense-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
+    /* Style the expense list */
+    .expense-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-.expense-list li:last-child {
-  border-bottom: none;
-}
+    .expense-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
 
-/* Set the background gradient */
-body {
-  background: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  margin: 0;
-  padding: 0;
-}
+    .expense-list li:last-child {
+      border-bottom: none;
+    }
 
-/* Position the login button */
-.auth-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
+    /* Set the background gradient */
+    body {
+      background: linear-gradient(to bottom, orange, red);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+    }
 
-.auth-button a {
-  padding: 10px 20px;
-  background-color: #337ab7;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  border-radius: 4px;
-}
+    /* Position the login button */
+    .auth-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
 
-.auth-button img {
-  width: 30px;
-  height: 30px;
-  background-color: #fff;
-  border-radius: 50%;
-}
-}  </style>
+    .auth-button a {
+      padding: 10px 20px;
+      background-color: #337ab7;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .auth-button img {
+      width: 30px;
+      height: 30px;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+  </style>
 </head>
 <body>
-
-
-
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
-
-
-<!-- TODO: Add SDKs for Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js"></script>
-
-
-<!-- Our script must be loaded after firebase references -->
- <script src="script.js"></script>
-
-
-
-
-
-
   <button onclick="exportExpenses()">Export Expenses</button>
 
   <button id="login-button">Login</button>
@@ -213,7 +176,7 @@ body {
       </select>
 
       <label for="filter-year">Select Year:</label>
-      
+
       <select id="filter-year">
         <option value="all">All Years</option>
         <option value="2021">2021</option>
@@ -250,10 +213,10 @@ body {
     <div class="message">In the total expense area, when it is income, it will be above 0, and if it is an expense, it will be negative.</div>
   </div>
 
-  <p>Unique Link: <span id="unique-link"></span></p>
-</div>
+  <script src="script.js"></script>
+</body>
+</html>
 
-<script src="script.js"></script>
 
   <script>
 
