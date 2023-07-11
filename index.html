@@ -217,11 +217,7 @@
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/qrcode.min.js"></script>
   <container>
     <div id="qrcode" style="display: block;"></div>
-    <div id="expenses">
-      <h1>Expenses</h1>
-      
-    </div>
-    
+
   </container>
 
 
@@ -233,24 +229,6 @@
 
 
 
-function generateUniqueLink() {
-  const uniqueId = Math.random().toString(36).substring(7);
-
-  return uniqueId;
-}
-
-function loadPage(uniqueId) {
-  const url = `https://jg121.github.io/expense-tracker/?uniqueId=${uniqueId}`;
-
-  window.location.href = url;
-}
-
-if (localStorage.getItem("uniqueId") === null) {
-  const uniqueId = generateUniqueLink();
-  localStorage.setItem("uniqueId", uniqueId);
-}
-
-loadPage(localStorage.getItem("uniqueId"));
 
 
 
