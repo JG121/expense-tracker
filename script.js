@@ -1,47 +1,30 @@
-// Function to update the URL with expense parameters
-function updateURLParams() {
-  const expenseData = {
-    param1: document.getElementById("expense-category").value,
-    param2: document.getElementById("expense-date").value,
-    // Add more parameters as needed, based on your app's expense form elements
-  };
-
-  const params = new URLSearchParams();
-  Object.entries(expenseData).forEach(([key, value]) => {
-    params.set(key, value);
+function generateQRCode(uniqueLink) {
+  // Generate the QR code.
+  const qrcode = new QRCode("unique-link", {
+    width: 200,
+    height: 200,
   });
 
-  const newUrl = window.location.origin + "?" + params.toString();
-
-  // Update the URL without refreshing the page
-  window.history.pushState({ path: newUrl }, "", newUrl);
+  // Display the QR code.
+  document.getElementById("qrcode").appendChild(qrcode.canvas);
 }
 
-// Function to retrieve expense data from URL parameters
-function retrieveExpenseDataFromURL() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const expenseData = {};
+// Generate the QR code for the current device.
+const uniqueLink = generateUniqueLink();
+generateQRCode(uniqueLink);
 
-  urlParams.forEach((value, key) => {
-    expenseData[key] = value;
-  });
+// Check if the user is on a different device.
+const currentDeviceId = localStorage.getItem("deviceId");
+const uniqueLinkDeviceId = sessionStorage.getItem("deviceId");
 
-  // Use the retrieved expenseData to populate the app with values
-  // ...
+if (currentDeviceId !== uniqueLinkDeviceId) {
+  // The user is on a different device.
+  // Generate a new unique link.
+  const newUniqueLink = generateUniqueLink();
 
-  return expenseData;
+  // Generate the QR code for the new device.
+  generateQRCode(newUniqueLink);
 }
-
-// Example usage
-updateURLParams();
-
-// Retrieve the expense data from URL parameters
-const retrievedExpenseData = retrieveExpenseDataFromURL();
-
-
-
-
-
 
 
 
@@ -66,7 +49,7 @@ import { getAnalytics } from "firebase/analytics";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAsYp_nL3wQ2IjNbXvrg-vO1HtOp4keoys",
-  authDomain: "official-expense-tracker.firebaseapp.com",
+  authDomain: "https://jg121.github.io/expense-tracker/",
   projectId: "official-expense-tracker",
   storageBucket: "official-expense-tracker.appspot.com",
   messagingSenderId: "763300574640",
