@@ -1,33 +1,34 @@
 // Function to generate a unique link based on the device
 function generateUniqueLink() {
-  // Get the device identifier (you can use any method to obtain it)
-  const deviceIdentifier = getDeviceIdentifier();
+  // Check if a unique link is already stored in local storage
+  let uniqueLink = localStorage.getItem("uniqueLink");
 
-  // Create a unique link using the device identifier
-  const uniqueLink = "https://jg121.github.io/expense-tracker/" + deviceIdentifier;
+  // If no unique link is found, generate a new one
+  if (!uniqueLink) {
+    // Generate a random number
+    const randomNumber = Math.floor(Math.random() * 1000000);
+
+    // Create the unique link using the random number
+    uniqueLink = "https://jg121.github.io/expense-tracker/" + randomNumber;
+
+    // Store the unique link in local storage
+    localStorage.setItem("uniqueLink", uniqueLink);
+  }
 
   return uniqueLink;
 }
 
-// Function to get the device identifier
-function getDeviceIdentifier() {
-  // You can use any method to obtain the device identifier
-  // Here, we are using the user agent as the device identifier
-  return navigator.userAgent;
-}
-
 // Generate the unique link
 const uniqueLink = generateUniqueLink();
+
+// Update the address bar with the unique link
+window.history.replaceState({}, "", uniqueLink);
 
 // Output the unique link
 console.log("Unique link:", uniqueLink);
 
 // Update the unique link element with the generated unique link
 document.getElementById("unique-link").textContent = uniqueLink;
-
-
-
-
 
 
 
