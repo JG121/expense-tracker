@@ -1,3 +1,18 @@
+const uniqueId = Math.random().toString(36).substring(7);
+
+document.getElementById("expenses").setAttribute("data-unique-id", uniqueId);
+
+
+function generateLink() {
+  const uniqueId = Math.random().toString(36).substring(7);
+
+  return `https://jg121.github.io/expense-tracker/?uniqueId=${uniqueId}`;
+}
+
+
+
+
+
 function generateQRCode(uniqueLink) {
   // Generate the QR code.
   const qrcode = new QRCode("unique-link", {
@@ -25,8 +40,9 @@ if (currentDeviceId !== uniqueLinkDeviceId) {
   // Generate the QR code for the new device.
   generateQRCode(newUniqueLink);
 }
+const QRCode = require("qrcode");
+generateQRCode(uniqueLink);
 
-const QRCode = require("qrcode/dist/qrcode.min.js");
 
 
 
@@ -121,7 +137,7 @@ function onSignIn(googleUser) {
   $(".g-signin2").css("display", "none");
 
   // Redirect to homepage after successful sign-in
-  window.location.href = "index.html";
+  window.location.href = "homepage.html";
 }
 
 
