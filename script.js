@@ -1,21 +1,15 @@
-function generateUniqueLink() {
+const uniqueId = Math.random().toString(36).substring(7);
+
+document.getElementById("expenses").setAttribute("data-unique-id", uniqueId);
+
+
+function generateLink() {
   const uniqueId = Math.random().toString(36).substring(7);
 
-  return uniqueId;
+  return `https://jg121.github.io/expense-tracker/?uniqueId=${uniqueId}`;
 }
 
-function loadPage(uniqueId) {
-  const url = `https://jg121.github.io/expense-tracker/?uniqueId=${uniqueId}`;
 
-  window.location.href = url;
-}
-
-if (localStorage.getItem("uniqueId") === null) {
-  const uniqueId = generateUniqueLink();
-  localStorage.setItem("uniqueId", uniqueId);
-}
-
-loadPage(localStorage.getItem("uniqueId"));
 
 
 
