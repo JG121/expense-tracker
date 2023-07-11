@@ -1,4 +1,37 @@
- // Your web app's Firebase configuration
+// Function to generate a unique link based on the device
+function generateUniqueLink() {
+  // Get the device identifier (you can use any method to obtain it)
+  const deviceIdentifier = getDeviceIdentifier();
+
+  // Create a unique link using the device identifier
+  const uniqueLink = "https://jg121.github.io/expense-tracker/" + deviceIdentifier;
+
+  return uniqueLink;
+}
+
+// Function to get the device identifier
+function getDeviceIdentifier() {
+  // You can use any method to obtain the device identifier
+  // Here, we are using the user agent as the device identifier
+  return navigator.userAgent;
+}
+
+// Generate the unique link
+const uniqueLink = generateUniqueLink();
+
+// Output the unique link
+console.log("Unique link:", uniqueLink);
+
+// Update the unique link element with the generated unique link
+document.getElementById("unique-link").textContent = uniqueLink;
+
+
+
+
+
+
+
+// Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
     apiKey: "AIzaSyAsYp_nL3wQ2IjNbXvrg-vO1HtOp4keoys",
@@ -21,46 +54,6 @@
 function register () {
  // Get all our input fields
  email = document.getElementById('email').value 
-}
-
-
-function generateUniqueLink() {
-  // Generate a random string.
-  const randomString = Math.random().toString(36).substring(7);
-
-  // Return the link.
-  return `https://jg121.github.io/expense-tracker/?link=${randomString}`;
-}
-
-// Generate a unique link for the current device.
-const uniqueLink = generateUniqueLink();
-
-// Store the unique link in the session.
-sessionStorage.setItem("uniqueLink", uniqueLink);
-
-// Display the unique link to the user.
-document.getElementById("unique-link").innerHTML = uniqueLink;
-
-// Get the user's ID.
-const userId = localStorage.getItem("userId");
-
-// Save the changes to the user's ID.
-localStorage.setItem("userId", userId);
-
-// Check if the user is on a different device.
-const currentDeviceId = localStorage.getItem("deviceId");
-const uniqueLinkDeviceId = sessionStorage.getItem("deviceId");
-
-if (currentDeviceId !== uniqueLinkDeviceId) {
-  // The user is on a different device.
-  // Generate a new unique link.
-  const newUniqueLink = generateUniqueLink();
-
-  // Store the new unique link in the session.
-  sessionStorage.setItem("uniqueLink", newUniqueLink);
-
-  // Display the new unique link to the user.
-  document.getElementById("unique-link").innerHTML = newUniqueLink;
 }
 
 
