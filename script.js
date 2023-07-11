@@ -24,13 +24,12 @@ function register () {
 }
 
 
-
 function generateUniqueLink() {
   // Generate a random string.
   const randomString = Math.random().toString(36).substring(7);
 
   // Return the link.
-  return `https://your-website.com/?link=${randomString}`;
+  return `https://jg121.github.io/expense-tracker/?link=${randomString}`;
 }
 
 // Generate a unique link for the current device.
@@ -41,6 +40,30 @@ sessionStorage.setItem("uniqueLink", uniqueLink);
 
 // Display the unique link to the user.
 document.getElementById("unique-link").innerHTML = uniqueLink;
+
+// Get the user's ID.
+const userId = localStorage.getItem("userId");
+
+// Save the changes to the user's ID.
+localStorage.setItem("userId", userId);
+
+// Check if the user is on a different device.
+const currentDeviceId = localStorage.getItem("deviceId");
+const uniqueLinkDeviceId = sessionStorage.getItem("deviceId");
+
+if (currentDeviceId !== uniqueLinkDeviceId) {
+  // The user is on a different device.
+  // Generate a new unique link.
+  const newUniqueLink = generateUniqueLink();
+
+  // Store the new unique link in the session.
+  sessionStorage.setItem("uniqueLink", newUniqueLink);
+
+  // Display the new unique link to the user.
+  document.getElementById("unique-link").innerHTML = newUniqueLink;
+}
+
+
 
 
 
