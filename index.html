@@ -227,6 +227,112 @@
 
 
   <script>
+// Generate a unique ID for the device
+function generateUniqueId() {
+  const uniqueId = Math.random().toString(36).substring(7);
+  return uniqueId;
+}
+
+// Check if the unique ID is stored in local storage
+function isUniqueIdStored() {
+  return localStorage.getItem("uniqueId") !== null;
+}
+
+// Get the stored unique ID from local storage
+function getStoredUniqueId() {
+  return localStorage.getItem("uniqueId");
+}
+
+// Store the unique ID in local storage
+function storeUniqueId(uniqueId) {
+  localStorage.setItem("uniqueId", uniqueId);
+}
+
+// Check if the URL contains the unique ID
+function isUniqueIdInURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.has("uniqueId");
+}
+
+// Get the unique ID from the URL
+function getUniqueIdFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get("uniqueId");
+}
+
+// Generate the shareable link with the unique ID
+function generateShareableLink(uniqueId) {
+  const url = window.location.origin + window.location.pathname;
+  const shareableLink = `${url}?uniqueId=${uniqueId}`;
+  return shareableLink;
+}
+
+// Check if the user is allowed to access the page based on the unique ID
+function isAllowedToAccessPage(uniqueId) {
+  const users = [
+    { uniqueId: "1234567890", allowed: true },
+    { uniqueId: "9876543210", allowed: true }
+  ];
+
+  return users.find((user) => user.uniqueId === uniqueId) !== undefined;
+}
+
+// Handle page load
+function handlePageLoad() {
+  // Check if the unique ID is stored in local storage
+  if (isUniqueIdStored()) {
+    // Get the stored unique ID
+    const storedUniqueId = getStoredUniqueId();
+
+    // Check if the URL contains the unique ID
+    if (isUniqueIdInURL()) {
+      const urlUniqueId = getUniqueIdFromURL();
+
+      // Check if the URL unique ID matches the stored unique ID
+      if (urlUniqueId === storedUniqueId) {
+        // Same device, the link stays the same
+        console.log("Same device, link stays the same");
+      } else {
+        // Different device, generate new unique ID and store it
+        const newUniqueId = generateUniqueId();
+        storeUniqueId(newUniqueId);
+        console.log("Different device, generated new unique ID");
+      }
+    } else {
+      // URL does not contain the unique ID, append it to the URL
+      const shareableLink = generateShareableLink(storedUniqueId);
+      window.history.replaceState({}, document.title, shareableLink);
+      console.log("Appended unique ID to the URL");
+    }
+  } else {
+    // Unique ID not stored, generate new unique ID and store it
+    const newUniqueId = generateUniqueId();
+    storeUniqueId(newUniqueId);
+    console.log("Generated new unique ID");
+  }
+
+  // Check if the user is allowed to access the page
+  const storedUniqueId = getStoredUniqueId();
+  if (isAllowedToAccessPage(storedUniqueId)) {
+    // The user is allowed to access the page
+    console.log("Access granted");
+  } else {
+    // The user is not allowed to access the page
+    console.log("Access denied");
+    window.location.href = "https://jgexpense-tracker.42web.io/";
+  }
+
+  // Handle sharing button click
+  const shareButton = document.querySelector(".share-button");
+  shareButton.addEventListener("click", function() {
+    const storedUniqueId = getStoredUniqueId();
+    const shareableLink = generateShareableLink(storedUniqueId);
+    console.log("Shareable link:", shareableLink);
+  });
+}
+
+// Call the handlePageLoad function when the page is loaded
+window.addEventListener("load", handlePageLoad);
 
 
 
