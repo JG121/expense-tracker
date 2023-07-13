@@ -214,7 +214,7 @@
   </div>
 
   <script src="script.js"></script>
-  <a href="https://jg121.github.io/expense-tracker/?uniqueId=${getUniqueId()}&edit=true">
+  <a href="https://jg121.github.io/cashcow/?uniqueId=${getUniqueId()}&edit=true">
     <button class="share-button">
       Share
     </button>
@@ -319,7 +319,7 @@ function handlePageLoad() {
   } else {
     // The user is not allowed to access the page
     console.log("Access denied");
-    window.location.href = "https://jgexpense-tracker.42web.io/";
+    window.location.href = "https://jg121.github.io/cashcow/";
   }
 
   // Handle sharing button click
@@ -343,7 +343,7 @@ const shareButton = document.querySelector(".share-button");
 
 shareButton.addEventListener("click", function() {
   const uniqueId = getUniqueId();
-  const url = `https://jg121.github.io/expense-tracker/?uniqueId=${uniqueId}&edit=true`;
+  const url = `https://jg121.github.io/cashcow/?uniqueId=${uniqueId}&edit=true`;
 
   window.open(url, "_blank");
 });
@@ -591,4 +591,3 @@ function filterExpenses() {
   </script>
 </body>
 </html>
-
